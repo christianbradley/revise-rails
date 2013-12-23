@@ -5,3 +5,10 @@ class Event < ActiveRecord::Base
   validates :occurred_at, presence: true
   validates :payload, presence: true
 end
+
+def Event.json_new attributes
+  self.new \
+    type: attributes[:type],
+    occurred_at: attributes[:occurredAt],
+    payload: attributes[:payload]
+end

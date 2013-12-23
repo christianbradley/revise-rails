@@ -9,20 +9,7 @@ class RevisionsController < ApplicationController
   end
 
   def create
-    revision_params = params.require(:revision)
-
-    @revision = Revision.new \
-      resource_type: revision_params[:resourceType],
-      resource_uuid: revision_params[:resourceUUID],
-      resource_version: revision_params[:resourceVersion]
-
-    revision_params[:events].each do |event_params|
-      event = Event.new \
-        type: event_params[:type],
-        occurred_at: event_params[:occurredAt],
-        payload: event_params[:payload]
-      @revision.events << event
-    end
+    @revision = Revision.json_new params.require(:revision)
 
     if @revision.save
       render "created", status: :created, location: revision_url(@revision)

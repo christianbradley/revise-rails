@@ -15,6 +15,20 @@ class Revision < ActiveRecord::Base
 
 end
 
+def Revision.json_new attributes
+  revision = self.new \
+    resource_type: attributes[:resourceType],
+    resource_uuid: attributes[:resourceUUID],
+    resource_version: attributes[:resourceVersion]
+
+  (attributes[:events] || []).each do |event_attributes|
+    event = Event.json_new event_attributes
+    revision.events << event
+  end
+
+  revision
+end
+
 def Revision.find_conflicting revision
   self.find_by \
     resource_type: revision.resource_type,
