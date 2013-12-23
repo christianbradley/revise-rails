@@ -18,7 +18,7 @@ class RevisionsController < ApplicationController
 
     revision_params[:events].each do |event_params|
       event = Event.new \
-        type_name: event_params[:type],
+        type: event_params[:type],
         occurred_at: event_params[:occurredAt],
         payload: event_params[:payload]
       @revision.events << event
