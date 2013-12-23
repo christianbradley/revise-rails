@@ -18,8 +18,10 @@ class RevisionTest < ActiveSupport::TestCase
 
   def test_resource_must_be_unique
     revision_attrs = { resource_type_name: "User", resource_uuid: SecureRandom.uuid, resource_version: 0 }
+    event_attrs = { type_name: "UserRegistered", occurred_at: Time.zone.now, payload: "{}" }
 
     first = Revision.new revision_attrs
+    first.events << Event.new(event_attrs)
     first.save!
 
     second = Revision.new revision_attrs
@@ -31,6 +33,14 @@ class RevisionTest < ActiveSupport::TestCase
     end
 
     assert event.new_record?
+  end
+
+  def test_must_contain_at_least_one_event 
+    revision_attrs = { resource_type_name: "User", resource_uuid: SecureRandom.uuid, resource_version: 0 }
+    revision = Revision.new revision_attrs
+
+    assert revision.invalid?
+    assert revision.errors[:events].length == 1
   end
 
 end
