@@ -43,4 +43,26 @@ class RevisionTest < ActiveSupport::TestCase
     assert revision.errors[:events].length == 1
   end
 
+  def test_validates_presence
+    revision = Revision.new 
+    assert revision.invalid?
+    assert_includes revision.errors[:resource_type_name], "can't be blank"
+    assert_includes revision.errors[:resource_uuid], "can't be blank"
+    assert_includes revision.errors[:resource_version], "can't be blank"
+  end
+
+  def test_validates_numericality_of_version
+    revision = Revision.new resource_version: "foo"
+    assert revision.invalid?
+    assert_includes revision.errors[:resource_version], "is not a number"
+
+    revision = Revision.new resource_version: -1
+    assert revision.invalid?
+    assert_includes revision.errors[:resource_version], "must be greater than or equal to 0"
+
+    revision = Revision.new resource_version: 1.1
+    assert revision.invalid?
+    assert_includes revision.errors[:resource_version], "must be an integer"
+  end
+
 end
