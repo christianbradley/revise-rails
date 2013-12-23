@@ -1,4 +1,3 @@
-require "authenticator"
 require "mocha/setup"
 
 class ApplicationControllerTest < ActionController::TestCase
