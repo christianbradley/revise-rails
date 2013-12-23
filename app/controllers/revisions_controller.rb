@@ -31,11 +31,7 @@ class RevisionsController < ApplicationController
     end
 
   rescue ActiveRecord::RecordNotUnique
-    @conflict = Revision.find_by \
-      resource_type: @revision.resource_type,
-      resource_uuid: @revision.resource_uuid,
-      resource_version: @revision.resource_version
-
+    @conflict = Revision.find_conflicting @revision
     render "conflict", status: :conflict
   end
 

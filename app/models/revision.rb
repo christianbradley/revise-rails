@@ -14,3 +14,10 @@ class Revision < ActiveRecord::Base
   end
 
 end
+
+def Revision.find_conflicting revision
+  self.find_by \
+    resource_type: revision.resource_type,
+    resource_uuid: revision.resource_uuid,
+    resource_version: revision.resource_version
+end
