@@ -9,11 +9,10 @@ class RevisionsController < ApplicationController
   end
 
   def create
-    resource = params.require(:resource)
     events = params.require(:events)
 
     @revision = Revision.new \
-      resource_type_name: resource[:type],
+      resource_type: resource[:type],
       resource_uuid: resource[:uuid],
       resource_version: resource[:version]
 
@@ -33,7 +32,7 @@ class RevisionsController < ApplicationController
 
   rescue ActiveRecord::RecordNotUnique
     @conflict = Revision.find_by \
-      resource_type_name: @revision.resource_type_name,
+      resource_type: @revision.resource_type,
       resource_uuid: @revision.resource_uuid,
       resource_version: @revision.resource_version
 

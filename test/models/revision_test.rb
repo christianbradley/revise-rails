@@ -7,7 +7,7 @@ class RevisionTest < ActiveSupport::TestCase
     registered = Event.new type_name: "UserRegistered", occurred_at: Time.zone.now, payload: "{}"
     set_password = Event.new type_name: "PasswordSet", occurred_at: Time.zone.now, payload: "{}"
 
-    revision = Revision.new resource_type_name: "User", resource_uuid: SecureRandom.uuid, resource_version: 0
+    revision = Revision.new resource_type: "User", resource_uuid: SecureRandom.uuid, resource_version: 0
     revision.events << registered
     revision.events << set_password
     revision.save!
@@ -17,7 +17,7 @@ class RevisionTest < ActiveSupport::TestCase
   end
 
   def test_resource_must_be_unique
-    revision_attrs = { resource_type_name: "User", resource_uuid: SecureRandom.uuid, resource_version: 0 }
+    revision_attrs = { resource_type: "User", resource_uuid: SecureRandom.uuid, resource_version: 0 }
     event_attrs = { type_name: "UserRegistered", occurred_at: Time.zone.now, payload: "{}" }
 
     first = Revision.new revision_attrs
@@ -36,7 +36,7 @@ class RevisionTest < ActiveSupport::TestCase
   end
 
   def test_must_contain_at_least_one_event 
-    revision_attrs = { resource_type_name: "User", resource_uuid: SecureRandom.uuid, resource_version: 0 }
+    revision_attrs = { resource_type: "User", resource_uuid: SecureRandom.uuid, resource_version: 0 }
     revision = Revision.new revision_attrs
 
     assert revision.invalid?
@@ -46,7 +46,7 @@ class RevisionTest < ActiveSupport::TestCase
   def test_validates_presence
     revision = Revision.new 
     assert revision.invalid?
-    assert_includes revision.errors[:resource_type_name], "can't be blank"
+    assert_includes revision.errors[:resource_type], "can't be blank"
     assert_includes revision.errors[:resource_uuid], "can't be blank"
     assert_includes revision.errors[:resource_version], "can't be blank"
   end

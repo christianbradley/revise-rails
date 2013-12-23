@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131223051310) do
+ActiveRecord::Schema.define(version: 20131223110946) do
 
   create_table "api_keys", force: true do |t|
     t.string "access_token"
@@ -27,11 +27,11 @@ ActiveRecord::Schema.define(version: 20131223051310) do
   end
 
   create_table "revisions", force: true do |t|
-    t.string  "resource_type_name"
+    t.string  "resource_type"
     t.string  "resource_uuid"
     t.integer "resource_version"
   end
 
-  add_index "revisions", ["resource_type_name", "resource_uuid", "resource_version"], name: "index_revisions_resource", unique: true
+  add_index "revisions", ["resource_type", "resource_uuid", "resource_version"], name: "index_revisions_resource", unique: true
 
 end
