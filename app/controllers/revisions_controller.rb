@@ -9,18 +9,18 @@ class RevisionsController < ApplicationController
   end
 
   def create
-    events = params.require(:events)
+    revision_params = params.require(:revision)
 
     @revision = Revision.new \
-      resource_type: resource[:type],
-      resource_uuid: resource[:uuid],
-      resource_version: resource[:version]
+      resource_type: revision_params[:resourceType],
+      resource_uuid: revision_params[:resourceUUID],
+      resource_version: revision_params[:resourceVersion]
 
-    events.each do |e|
+    revision_params[:events].each do |event_params|
       event = Event.new \
-        type_name: e[:type],
-        occurred_at: e[:occurredAt],
-        payload: e[:payload]
+        type_name: event_params[:type],
+        occurred_at: event_params[:occurredAt],
+        payload: event_params[:payload]
       @revision.events << event
     end
 

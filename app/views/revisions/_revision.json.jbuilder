@@ -1,11 +1,9 @@
 json.id revision.id
-json.url revision_url(revision) rescue nil
+json.url revision_url(revision) unless revision.id.nil?
 
-json.resource do
-  json.type revision.resource_type_name
-  json.uuid revision.resource_uuid
-  json.version revision.resource_version
-end
+json.resourceType revision.resource_type
+json.resourceUUID revision.resource_uuid
+json.resourceVersion revision.resource_version
 
 json.events do
   json.array! revision.events, partial: "revisions/event", as: :event
