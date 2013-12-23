@@ -11,7 +11,13 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131223040225) do
+ActiveRecord::Schema.define(version: 20131223051310) do
+
+  create_table "api_keys", force: true do |t|
+    t.string "access_token"
+  end
+
+  add_index "api_keys", ["access_token"], name: "index_api_keys_on_access_token", unique: true
 
   create_table "events", force: true do |t|
     t.string   "type_name"

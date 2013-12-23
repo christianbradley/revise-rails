@@ -1,5 +1,7 @@
 EndeavorEventStorage::Application.routes.draw do
   
+  get "ping" => "application#ping"
+
   resources :revisions
 
   # The priority is based upon order of creation: first created -> highest priority.
