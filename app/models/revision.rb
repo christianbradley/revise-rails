@@ -15,14 +15,14 @@ class Revision < ActiveRecord::Base
 
 end
 
-def Revision.json_new attributes
+def Revision.build_from_json_hash attributes
   revision = self.new \
     resource_type: attributes[:resourceType],
     resource_uuid: attributes[:resourceUUID],
     resource_version: attributes[:resourceVersion]
 
   (attributes[:events] || []).each do |event_attributes|
-    event = Event.json_new event_attributes
+    event = Event.build_from_json_hash event_attributes
     revision.events << event
   end
 

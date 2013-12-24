@@ -6,7 +6,7 @@ class Event < ActiveRecord::Base
   validates :payload, presence: true
 end
 
-def Event.json_new attributes
+def Event.build_from_json_hash attributes
   self.new \
     type: attributes[:type],
     occurred_at: attributes[:occurredAt],

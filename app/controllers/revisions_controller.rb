@@ -9,7 +9,7 @@ class RevisionsController < ApplicationController
   end
 
   def create
-    @revision = Revision.json_new params.require(:revision)
+    @revision = Revision.build_from_json_hash params.require(:revision)
 
     if @revision.save
       render "created", status: :created, location: revision_url(@revision)
