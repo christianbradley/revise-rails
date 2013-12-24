@@ -9,8 +9,4 @@ json.events do
   json.array! revision.events, partial: "revisions/event", as: :event
 end
 
-if revision.errors.any?
-  json.errors do
-    json.array! revision.errors
-  end
-end
+json.partial! "revisions/errors", errors: revision.errors
