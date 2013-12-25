@@ -4,6 +4,24 @@ revise-rails
 Revision Storage for Event Sourcing (Event Store) - Rails Implementation
 
 
+### Making Requests
+
+* The server currently supports a simple JSON REST API. 
+* All requests must contain the HTTP header `Accept:application/json`.
+
+### POST Parameters
+
+* POST parameters must be sent via JSON
+* Parameter names are expected to follow JSON conventions (ie: _camelCaseKeys_)
+* Requests must contain the HTTP header `Content-Type:application/json`.
+
+### Authorization
+
+* The server currently supports only HTTP Token Authorization
+* All requests must be authenticated
+* Requests must contain the HTTP header `Authorization: Token token="your-access-token-here"`
+* To create an authorization token: `RAILS_ENV=development rake token:create` (for development)
+
 ### Storing a Revision
 
 A Revision contains a resource description and an array of events. 
