@@ -150,7 +150,7 @@ receive the following response:
 
 ### Validation Errors
 
-If the JSON you passed was invalid, you will receive the following response:
+If the JSON parameters you passed were invalid, you will receive the following response:
 
 * Status: HTTP 422 UNPROCESSABLE ENTITY
 * Content-Type:application/json
@@ -188,9 +188,7 @@ If the JSON you passed was invalid, you will receive the following response:
 }
 ```
 
-As you can see, you will find an "errors" object on the Revision and/or any of the Event
-objects it contains. This object will contain a field for each key in the original object that has an error, and
-the value of that field is an Array of messages.
+The "revision" object you passed as JSON will be returned. In addition, you will find an "errors" object on the Revision and/or any of the Event objects it contains. This object will contain a field for each property of the original object that has an error. The value of that field will always be an array of messages describing why they were invalid.
 
 ---
 
