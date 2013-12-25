@@ -1,4 +1,4 @@
-EndeavorEventStorage::Application.routes.draw do
+Revise::Application.routes.draw do
   
   get "ping" => "application#ping"
 

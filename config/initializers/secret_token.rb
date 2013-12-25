@@ -9,4 +9,4 @@
 
 # Make sure your secret_key_base is kept private
 # if you're sharing your code publicly.
-EndeavorEventStorage::Application.config.secret_key_base = '357ccb275f6f79ac6b8ee09cd522a0b646ec75fad885867ca9921fa085bbae0d339ba2b03c2c5992123fb08c1ce0540579245664ef163568be74351c5acdd48f'
+Revise::Application.config.secret_key_base = '357ccb275f6f79ac6b8ee09cd522a0b646ec75fad885867ca9921fa085bbae0d339ba2b03c2c5992123fb08c1ce0540579245664ef163568be74351c5acdd48f'

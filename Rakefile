@@ -3,4 +3,4 @@
 
 require File.expand_path('../config/application', __FILE__)
 
-EndeavorEventStorage::Application.load_tasks
+Revise::Application.load_tasks
