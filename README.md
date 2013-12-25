@@ -194,7 +194,6 @@ the value of that field is an Array of messages.
 
 ---
 
-[event-sourcing]: http://martinfowler.com/eaaDev/EventSourcing.html "Martin Fowler: Event
-Sourcing"
+[event-sourcing]: http://martinfowler.com/eaaDev/EventSourcing.html
 
 [rfc3339]: http://www.ietf.org/rfc/rfc3339.txt
